@@ -11,11 +11,7 @@
 }
 
 @layer components {
-  /* .sidebar { @apply fixed top-0 left-0 h-screen w-64 flex flex-col z-40; background: #020c1b; } */
-  .sidebar {
-  @apply h-screen w-64 flex flex-col;
-  background: #020c1b;
-}
+  .sidebar { @apply h-screen w-64 flex flex-col z-40; background: #020c1b; }
   .nav-link { @apply flex items-center gap-3 px-4 py-2.5 mx-2 rounded-xl text-sm font-medium transition-all duration-150 relative; color: #7ca3cc; }
   .nav-link:hover { background: rgba(26,86,219,0.12); color: #93c5fd; }
   .nav-link.active { background: rgba(26,86,219,0.2); color: #60a5fa; }

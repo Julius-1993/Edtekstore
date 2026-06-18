@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext'
 import { fmtDate, fmtDateTime, categoryLabel, priorityColor, WORKFLOW_STAGES, SOFTWARE_LIST, SOFTWARE_STATUSES, softwareStatusColor } from '../utils/format'
 import { StatusBadge, LoadingSpinner } from '../components/shared'
 import toast from 'react-hot-toast'
-import { ArrowLeft, CheckCircle, XCircle, Package, Settings, Truck, Mail, AlertTriangle, Building2, User, Laptop, Plus, Trash2, Save, Send, Pencil } from 'lucide-react'
+import { ArrowLeft, CheckCircle, XCircle, Package, Settings, Truck, Mail, AlertTriangle, Building2, User, Laptop, Plus, Trash2, Save, Send, Pencil, Printer } from 'lucide-react'
 
 const STAGE_ORDER = ['pending','approved','processing','shipped','confirmed','completed']
 
@@ -30,6 +30,8 @@ export default function RequestDetailPage() {
   const [resendEmail, setResendEmail]       = useState('')
   const [softwareList, setSoftwareList]     = useState([])
   const [savingSw, setSavingSw]             = useState(false)
+  const [waybillUrl, setWaybillUrl]         = useState('')
+  const [generatingWaybill, setGeneratingWaybill] = useState(false)
 
   useEffect(() => { fetchRequest() }, [id])
 
@@ -37,6 +39,7 @@ export default function RequestDetailPage() {
     try {
       const res = await api.get(`/requests/${id}`)
       setRequest(res.data.request)
+      if (res.data.request.waybillToken) setWaybillUrl(`${window.location.origin}/waybill/${res.data.request.waybillToken}`)
       const qtys = {}
       res.data.request.items?.forEach(i => { qtys[i._id] = i.quantityRequested })
       setApprovedQtys(qtys)
@@ -76,6 +79,18 @@ export default function RequestDetailPage() {
       fetchRequest()
     } catch (err) { toast.error(err.response?.data?.message || 'Failed') }
     finally { setSavingSw(false) }
+  }
+
+  const generateWaybill = async () => {
+    setGeneratingWaybill(true)
+    try {
+      const res = await api.post(`/requests/${id}/waybill`)
+      const url = `${window.location.origin}/waybill/${res.data.waybillToken}`
+      setWaybillUrl(url)
+      toast.success('Waybill ready!')
+      window.open(url, '_blank')
+    } catch (err) { toast.error(err.response?.data?.message || 'Failed to generate waybill') }
+    finally { setGeneratingWaybill(false) }
   }
 
   const handleSubmitDraft = async () => {
@@ -143,6 +158,21 @@ export default function RequestDetailPage() {
           )}
           {hasSoftware && (
             <button onClick={() => setSoftwarePopup(true)} className="btn btn-ghost btn-sm gap-1 text-xs text-purple-600"><Laptop className="w-3.5 h-3.5" /> View Software</button>
+          )}
+          {/* Waybill button — available from processing stage onwards */}
+          {['processing','shipped','confirmed','completed'].includes(request.status) && (isStorekeeper || isTechnical) && (
+            waybillUrl ? (
+              <a href={waybillUrl} target="_blank" rel="noreferrer"
+                className="btn btn-outline btn-sm gap-1 text-xs text-green-700 border-green-300">
+                <Printer className="w-3.5 h-3.5" /> Print Waybill
+              </a>
+            ) : (
+              <button onClick={generateWaybill} disabled={generatingWaybill}
+                className="btn btn-outline btn-sm gap-1 text-xs text-green-700 border-green-300">
+                {generatingWaybill ? <span className="loading loading-spinner loading-xs" /> : <Printer className="w-3.5 h-3.5" />}
+                Generate Waybill
+              </button>
+            )
           )}
         </div>
       </div>

@@ -3,7 +3,7 @@ import api from '../utils/api'
 import { fmtDateTime, fmtRelative } from '../utils/format'
 import { LoadingSpinner, PageHeader, StatusBadge } from '../components/shared'
 import toast from 'react-hot-toast'
-import { Plus, Search, User, Pencil, Trash2, Flag, Key, Eye, ShieldAlert, ShieldCheck } from 'lucide-react'
+import { Plus, Search, User, Pencil, Trash2, Flag, Key, Eye, ShieldAlert, ShieldCheck, Send } from 'lucide-react'
 
 const ROLES = ['admin','storekeeper','sales','technical']
 const ROLE_COLOR = { admin:'#4a9eff', storekeeper:'#34d399', sales:'#f59e0b', technical:'#a78bfa' }
@@ -102,6 +102,13 @@ export default function UsersPage() {
     finally { setSaving(false) }
   }
 
+  const handleResendReset = async (u) => {
+    try {
+      await api.post(`/auth/users/${u._id}/resend-reset`)
+      toast.success('Reset link resent (valid 24h)')
+    } catch (err) { toast.error(err.response?.data?.message || 'Failed to resend') }
+  }
+
   const toggleActive = async (u) => {
     try {
       await api.put(`/auth/users/${u._id}`, { isActive: !u.isActive })
@@ -189,6 +196,7 @@ export default function UsersPage() {
                       <button onClick={() => openActivity(u)} title="View Activity" className="btn btn-ghost btn-xs p-1"><Eye className="w-3.5 h-3.5 text-slate-400" /></button>
                       <button onClick={() => openEdit(u)} title="Edit" className="btn btn-ghost btn-xs p-1"><Pencil className="w-3.5 h-3.5 text-blue-500" /></button>
                       <button onClick={() => openPwd(u)} title="Reset Password" className="btn btn-ghost btn-xs p-1"><Key className="w-3.5 h-3.5 text-amber-500" /></button>
+                      <button onClick={() => handleResendReset(u)} title="Resend Reset Link (24h)" className="btn btn-ghost btn-xs p-1"><Send className="w-3.5 h-3.5 text-indigo-500" /></button>
                       <button onClick={() => openFlag(u)} title={u.isFlagged ? 'Unflag' : 'Flag'} className="btn btn-ghost btn-xs p-1">
                         {u.isFlagged ? <ShieldCheck className="w-3.5 h-3.5 text-green-500" /> : <Flag className="w-3.5 h-3.5 text-orange-500" />}
                       </button>

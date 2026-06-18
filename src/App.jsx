@@ -17,6 +17,8 @@ import RequestDetailPage from './pages/RequestDetailPage'
 import DeliveryListPage from './pages/DeliveryListPage'
 import ConfirmDeliveryPage from './pages/ConfirmDeliveryPage'
 import UsersPage from './pages/UsersPage'
+import WaybillPage from './pages/WaybillPage'
+import ChangePasswordPage from './pages/ChangePasswordPage'
 
 const Guard = ({ children, roles }) => {
   const { user, loading } = useAuth()
@@ -35,6 +37,8 @@ export default function App() {
       <Route path="/forgot-password"         element={<ForgotPasswordPage />} />
       <Route path="/reset-password/:token"   element={<ResetPasswordPage />} />
       <Route path="/confirm-delivery/:token" element={<ConfirmDeliveryPage />} />
+      <Route path="/waybill/:token" element={<WaybillPage />} />
+      <Route path="/change-password" element={<Guard><ChangePasswordPage /></Guard>} />
 
       <Route path="/" element={<Guard><Layout /></Guard>}>
         <Route index element={<DashboardPage />} />

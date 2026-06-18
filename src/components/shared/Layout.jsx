@@ -1,7 +1,7 @@
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { EdtekLogo } from '../shared'
-import { LayoutDashboard, Package, ClipboardList, Truck, Users, LogOut, User, Menu, X } from 'lucide-react'
+import { LayoutDashboard, Package, ClipboardList, Truck, Users, LogOut, User, Menu, X, ShieldAlert } from 'lucide-react'
 import { useState } from 'react'
 
 const NAV = [
@@ -16,7 +16,7 @@ const ROLE_COLOR = { admin:'#4a9eff', storekeeper:'#34d399', sales:'#f59e0b', te
 const ROLE_BG    = { admin:'rgba(74,158,255,0.12)', storekeeper:'rgba(52,211,153,0.12)', sales:'rgba(245,158,11,0.12)', technical:'rgba(167,139,250,0.12)' }
 
 export default function Layout() {
-  const { user, logout } = useAuth()
+  const { user, logout, mustResetPassword } = useAuth()
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const filteredNav = NAV.filter(n => n.roles.includes(user?.role))
@@ -90,7 +90,20 @@ export default function Layout() {
             </div>
           </div>
         </header>
-        <main className="flex-1 overflow-y-auto"><div className="p-6 max-w-7xl mx-auto"><Outlet /></div></main>
+        <main className="flex-1 overflow-y-auto">
+          {mustResetPassword && (
+            <div className="flex items-center gap-3 px-6 py-2.5" style={{background:'#fff7ed',borderBottom:'1px solid #fed7aa'}}>
+              <ShieldAlert className="w-4 h-4 text-orange-500 flex-shrink-0" />
+              <p className="text-sm text-orange-700 font-medium flex-1">
+                You are using a temporary password — it will expire in 48 hours.
+              </p>
+              <a href="/change-password" className="btn btn-sm text-white text-xs" style={{background:'#ea580c',border:'none'}}>
+                Set Password Now
+              </a>
+            </div>
+          )}
+          <div className="p-6 max-w-7xl mx-auto"><Outlet /></div>
+        </main>
       </div>
     </div>
   )
