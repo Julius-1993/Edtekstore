@@ -4,7 +4,7 @@ import { fmtDate } from '../utils/format'
 
 const BACKEND_URL = import.meta.env.VITE_API_URL || 'https://edtekstorebackend.onrender.com'
 
-// ── Waybill number box ──────────────────────────────────────────────────────
+// Waybill number box 
 const WBBox = ({ label, value }) => (
   <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:6 }}>
     <span style={{ fontWeight:700, fontSize:13, color:'#1a3a1a', minWidth:100 }}>{label}:</span>
@@ -12,12 +12,12 @@ const WBBox = ({ label, value }) => (
   </div>
 )
 
-// ── Signature block ─────────────────────────────────────────────────────────
+// Signature block
 const SigBlock = ({ title }) => (
   <div style={{ flex:1, minWidth:200 }}>
     <p style={{ fontWeight:800, fontSize:14, marginBottom:32, color:'#000' }}>{title}</p>
     <div style={{ borderBottom:'1px solid #555', marginBottom:8 }} />
-    <p style={{ fontSize:12, color:'#333', marginBottom:20 }}>Name:</p>
+    <p style={{ fontSize:12, color:'#333', marginBottom:20 }}>Name</p>
     <div style={{ borderBottom:'1px solid #555', marginBottom:8 }} />
     <p style={{ fontSize:12, color:'#333', marginBottom:20 }}>Signature</p>
     <div style={{ borderBottom:'1px solid #555', marginBottom:8 }} />
@@ -92,15 +92,17 @@ export default function WaybillPage() {
           <div style={{ display:'flex', alignItems:'center', gap:12, flex:1 }}>
             <div style={{
               background:'#fff',
-              border:'2px solid #2d7a2d',
-              borderRadius:8,
+              // border:'2px solid #2d7a2d',
+              // borderRadius:8,
               padding:'6px 10px',
               display:'flex',
               flexDirection:'column',
               alignItems:'center',
               lineHeight:1.1
             }}>
-              <span style={{ fontSize:20, fontWeight:900, color:'#2d7a2d', letterSpacing:1 }}>EdTek</span>
+              <span style={{ fontSize:20, fontWeight:900, color:'#2d7a2d', letterSpacing:1 }}>
+                <img src="/logo.png" alt="EDTEK" style={{ width:48, height:48, objectFit:'contain', flexShrink:0 }} />
+                </span>
               <span style={{ fontSize:7, fontWeight:700, color:'#555', letterSpacing:0.5, textTransform:'uppercase' }}>INTERACTIVE BOARD</span>
             </div>
             <div style={{ width:3, height:50, background:'#2d7a2d' }} />
