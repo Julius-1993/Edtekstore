@@ -69,12 +69,12 @@ export default function WaybillPage() {
   const shippedDate = r.shippedAt ? fmtDate(r.shippedAt) : fmtDate(r.updatedAt)
 
   return (
-    <div style={{ background:'#e5e7eb', minHeight:'100vh', padding:'24px 16px', fontFamily:"'Arial', sans-serif" }}>
+    <div style={{ background:'#fff', minHeight:'100vh', padding:'24px 16px', fontFamily:"'Arial', sans-serif" }}>
 
       {/* Print button — hidden when printing */}
       <div className="no-print" style={{ maxWidth:750, margin:'0 auto 16px', display:'flex', gap:12, justifyContent:'flex-end' }}>
         <button onClick={handlePrint}
-          style={{ background:'#020c1b', color:'white', border:'none', padding:'10px 28px', borderRadius:8, fontWeight:700, fontSize:14, cursor:'pointer', display:'flex', alignItems:'center', gap:8 }}>
+          style={{ background:'#1a56db', color:'white', border:'none', padding:'10px 28px', borderRadius:8, fontWeight:700, fontSize:14, cursor:'pointer', display:'flex', alignItems:'center', gap:8 }}>
           🖨️ Print Waybill
         </button>
       </div>
@@ -92,8 +92,6 @@ export default function WaybillPage() {
           <div style={{ display:'flex', alignItems:'center', gap:12, flex:1 }}>
             <div style={{
               background:'#fff',
-              // border:'2px solid #2d7a2d',
-              // borderRadius:8,
               padding:'6px 10px',
               display:'flex',
               flexDirection:'column',
@@ -101,7 +99,7 @@ export default function WaybillPage() {
               lineHeight:1.1
             }}>
               <span style={{ fontSize:20, fontWeight:900, color:'#2d7a2d', letterSpacing:1 }}>
-                <img src="/logo.png" alt="EDTEK" style={{ width:48, height:48, objectFit:'contain', flexShrink:0 }} />
+                <img src="/edtek-logo.png" alt="EDTEK" style={{ width:60, height:50, objectFit:'contain', flexShrink:0 }} />
                 </span>
               <span style={{ fontSize:7, fontWeight:700, color:'#555', letterSpacing:0.5, textTransform:'uppercase' }}>INTERACTIVE BOARD</span>
             </div>
@@ -124,7 +122,8 @@ export default function WaybillPage() {
             <p style={{ fontSize:13, color:'#333', margin:0, lineHeight:1.6 }}>
               {r.toOrganization},<br />
               {r.deliveryAddress || r.toDepartment}<br />
-              {r.contactPerson && <><br />{r.contactPerson}</>}
+              {r.contactPerson && <><br />{r.contactPerson}</>},
+              <br />{r.Phone || r.contactPhone}
             </p>
           </div>
           <div style={{ textAlign:'right', flexShrink:0 }}>
@@ -235,7 +234,7 @@ export default function WaybillPage() {
         {/* ── METADATA (shown on screen, hidden on print) ── */}
         <div className="no-print" style={{ background:'#eff6ff', borderTop:'1px solid #bfdbfe', padding:'12px 28px', display:'flex', gap:24, flexWrap:'wrap' }}>
           <div style={{ fontSize:12, color:'#1e40af' }}>
-            <strong>Request #:</strong> {r.requestNumber}
+            <strong>Request No:</strong> {r.requestNumber}
           </div>
           <div style={{ fontSize:12, color:'#1e40af' }}>
             <strong>Requested by:</strong> {r.requestedBy?.name}
@@ -257,7 +256,7 @@ export default function WaybillPage() {
           body { margin: 0; background: white !important; }
           .no-print { display: none !important; }
           .waybill-doc { box-shadow: none !important; max-width: 100% !important; }
-          @page { size: A4; margin: 10mm; }
+          @page { size: A4; margin: 9mm; }
         }
       `}</style>
     </div>

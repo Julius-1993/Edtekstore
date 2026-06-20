@@ -118,7 +118,7 @@ export default function UsersPage() {
   }
 
   return (
-    <div className="fade-up space-y-5">
+    <div className="fade-up space-y-5 mt-5">
       <PageHeader
         title="User Management"
         subtitle={`${users.length} total users`}
@@ -131,7 +131,7 @@ export default function UsersPage() {
       />
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="flex flex-col sm:flex-row gap-3 sm:items-center justify-between bg-slate-50 border border-slate-300 rounded-lg">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input className="input input-bordered w-full pl-9 bg-white text-sm" placeholder="Search name, email, department..."
@@ -144,7 +144,7 @@ export default function UsersPage() {
       </div>
 
       {/* Table */}
-      <div className="card-base overflow-hidden">
+      <div className="card-base overflow-hidden border border-slate-300 rounded-lg shadow-lg py-20">
         <div className="overflow-x-auto">
           <table className="table w-full">
             <thead className="bg-slate-50 border-b border-slate-200">
