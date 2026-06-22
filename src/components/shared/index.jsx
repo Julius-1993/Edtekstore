@@ -9,7 +9,7 @@ export function LoadingSpinner({ fullPage, size = 'md' }) {
   if (fullPage) return (
     <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
       <div className="flex flex-col items-center gap-3">
-       <img src="/logo.png" alt="EDTEK" className="w-16 h-16" />
+       <img src="/edtek-logo.png" alt="EDTEK" className="w-16 h-16" />
         <span className={`loading loading-spinner loading-lg text-primary mt-2`} />
       </div>
     </div>
