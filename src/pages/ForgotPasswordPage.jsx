@@ -82,13 +82,14 @@ export function ResetPasswordPage() {
   const [confirm, setConfirm] = useState('')
   const [showPw, setShowPw] = useState(false)
   const [loading, setLoading] = useState(false)
+  const API = import.meta.env.VITE_API_URL
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (password !== confirm) { toast.error('Passwords do not match'); return }
     setLoading(true)
     try {
-      const res = await fetch(`/api/auth/reset-password/${token}`, {
+      const res = await fetch(`${API}/api/auth/reset-password/${token}`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
       })
