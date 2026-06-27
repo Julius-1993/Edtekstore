@@ -95,7 +95,7 @@ export default function ConfirmDeliveryPage() {
   useEffect(() => {
     const fetchRequest = async () => {
       try {
-        const response = await fetch(`/api/deliveries/confirm/${token}`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/deliveries/confirm/${token}`)
         const data = await response.json()
 
         if (!data.success) {
@@ -136,7 +136,7 @@ export default function ConfirmDeliveryPage() {
     setSubmitting(true)
 
     try {
-      const response = await fetch(`/api/deliveries/confirm/${token}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/deliveries/confirm/${token}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
