@@ -9,11 +9,13 @@ export function ForgotPasswordPage() {
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
 
+  const API = import.meta.env.VITE_API_URL
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     try {
-      const res = await fetch('/api/auth/forgot-password', {
+      const res = await fetch(`${API}/api/auth/forgot-password`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
       })
@@ -28,7 +30,7 @@ export function ForgotPasswordPage() {
     <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#f1f5f9' }}>
       <div className="w-full max-w-sm">
         <div className="flex items-center gap-2 mb-7">
-          <EdtekLogo size={32} />
+          <img src="/edtek-logo.png" alt="EDTEK Interactive" className="w-8 h-8" />
           <span className="font-bold" style={{ color: '#020c1b' }}>EDTEK StoreTrack</span>
         </div>
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
@@ -101,7 +103,7 @@ export function ResetPasswordPage() {
     <div className="min-h-screen flex items-center justify-center p-6" style={{ background: '#f1f5f9' }}>
       <div className="w-full max-w-sm">
         <div className="flex items-center gap-2 mb-7">
-          <EdtekLogo size={32} />
+          <img src="/edtek-logo.png" alt="EDTEK Interactive" className="w-8 h-8" />
           <span className="font-bold" style={{ color: '#020c1b' }}>EDTEK StoreTrack</span>
         </div>
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
