@@ -13,7 +13,7 @@ const Wrapper = ({ children }) => (
       <div className="text-center mb-7">
         <div className="flex items-center justify-center gap-3 mb-3">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: '#020c1b' }}>
-            <EdtekLogo size={26} dark />
+            <img src="/edtek-logo.png" alt="EDTEK Interactive" className="w-6 h-6" />
           </div>
           <div className="text-left">
             <p className="font-bold text-lg leading-none" style={{ color: '#020c1b' }}>EDTEK Interactive</p>

@@ -92,11 +92,9 @@ export default function WaybillPage() {
           <div style={{ display:'flex', alignItems:'center', gap:12, flex:1 }}>
             <div style={{
               background:'#fff',
-              padding:'6px 10px',
               display:'flex',
               flexDirection:'column',
               alignItems:'center',
-              lineHeight:1.1
             }}>
               <span style={{ fontSize:20, fontWeight:900, letterSpacing:1 }}>
                 <img src="/edtek-logo.png" alt="EDTEK" style={{ width:60, height:50, objectFit:'contain', flexShrink:0 }} />
