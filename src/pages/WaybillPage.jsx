@@ -98,7 +98,7 @@ export default function WaybillPage() {
               alignItems:'center',
               lineHeight:1.1
             }}>
-              <span style={{ fontSize:20, fontWeight:900, color:'#2d7a2d', letterSpacing:1 }}>
+              <span style={{ fontSize:20, fontWeight:900, letterSpacing:1 }}>
                 <img src="/edtek-logo.png" alt="EDTEK" style={{ width:60, height:50, objectFit:'contain', flexShrink:0 }} />
                 </span>
               <span style={{ fontSize:7, fontWeight:700, color:'#555', letterSpacing:0.5, textTransform:'uppercase' }}>INTERACTIVE BOARD</span>

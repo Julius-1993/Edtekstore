@@ -113,7 +113,7 @@ export default function DashboardPage() {
       )}
 
       {/* Recent Tables */}
-      <div className="grid lg:grid-cols-2 gap-5">
+      <div className="grid lg:grid-cols-2 gap-5 py-4 lg:py-6">
         {/* Recent Requests */}
         <div className="card-pad">
           <div className="flex items-center justify-between mb-4">
