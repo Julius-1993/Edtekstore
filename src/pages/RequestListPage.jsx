@@ -178,6 +178,94 @@ export default function RequestListPage() {
           </div>
         </div>
       )}
+    {/* ── VIEW MODAL ── */}
+      {viewModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[85vh] overflow-y-auto p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-bold text-base" style={{ color: '#020c1b' }}>
+                {selectedRequest ? selectedRequest.requestNumber : 'Request Details'}
+              </h3>
+              <button onClick={closeView} className="btn btn-ghost btn-sm btn-circle"><X className="w-4 h-4" /></button>
+            </div>
+
+            {viewLoading ? (
+              <div className="py-10"><LoadingSpinner /></div>
+            ) : !selectedRequest ? (
+              <p className="text-sm text-slate-400 text-center py-10">Failed to load request</p>
+            ) : (
+              <div className="space-y-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <StatusBadge status={selectedRequest.status} />
+                </div>
+
+                <dl className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+                  {[
+                    ['Organization', selectedRequest.toOrganization],
+                    ['Department', selectedRequest.toDepartment || '—'],
+                    ['Contact', selectedRequest.contactPerson || '—'],
+                    ['Phone', selectedRequest.contactPhone || '—'],
+                    ['Email', selectedRequest.contactEmail || '—'],
+                    ['Expected Delivery', fmtDate(selectedRequest.expectedDeliveryDate) || '—'],
+                    ['Shipped At', fmtDateTime(selectedRequest.shippedAt) || '—'],
+                    ['Confirmed At', fmtDateTime(selectedRequest.confirmedAt) || '—'],
+                  ].map(([l, v]) => (
+                    <div key={l}>
+                      <dt className="text-xs font-semibold uppercase tracking-wide" style={{ color: '#94a3b8' }}>{l}</dt>
+                      <dd className="font-medium" style={{ color: '#334155' }}>{v}</dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide mb-2" style={{ color: '#94a3b8' }}>
+                    Items ({selectedRequest.items?.length || 0})
+                  </p>
+                  <div className="overflow-x-auto">
+                    <table className="table w-full text-sm">
+                      <thead className="bg-slate-50">
+                        <tr>
+                          <th className="th">Item</th>
+                          <th className="th">Serial</th>
+                          <th className="th text-right">Requested</th>
+                          <th className="th text-right">Approved</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {selectedRequest.items?.map(item => (
+                          <tr key={item._id}>
+                            <td className="td font-semibold" style={{ color: '#020c1b' }}>
+                              {item.name}{item.screenSize ? ` ${item.screenSize}"` : ''}
+                            </td>
+                            <td className="td"><span className="serial-tag">{item.serialNumber}</span></td>
+                            <td className="td text-right font-mono">{item.quantityRequested} {item.unit}</td>
+                            <td className="td text-right font-mono">{item.quantityApproved ?? '—'} {item.unit}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {selectedRequest.missingItemsNote && (
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: '#dc2626' }}>Missing Items</p>
+                    <p className="text-sm p-3 rounded-lg" style={{ background: '#fef2f2', color: '#991b1b' }}>
+                      {selectedRequest.missingItemsNote}
+                    </p>
+                  </div>
+                )}
+
+                <div className="pt-3 border-t border-slate-100">
+                  <Link to={`/requests/${selectedRequest._id}`} className="text-xs font-medium text-blue-600 hover:underline">
+                    Open full request page →
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
