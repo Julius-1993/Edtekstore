@@ -192,7 +192,7 @@ export default function RequestDetailPage() {
                     style={active && !isRej ? { background:'#1a56db' } : {}}>
                     {done ? '✓' : i+1}
                   </div>
-                  <span className={`text-xs font-medium capitalize whitespace-nowrap ${done?'text-green-600':active?(isRej?'text-red-600':'text-blue-600'):'text-slate-400'}`}>{stage}</span>
+                  <span className={`text-xs font-medium capitalize whitespace-nowrap ${done?'text-green-600':active?(isRej?'text-red-600':'text-blue-950'):'text-slate-400'}`}>{stage}</span>
                 </div>
                 {i < STAGE_ORDER.length-1 && <div className={`h-0.5 w-8 sm:w-14 mb-4 flex-shrink-0 ${i<stageIdx?'bg-green-400':'bg-slate-200'}`} />}
               </div>
@@ -293,7 +293,7 @@ export default function RequestDetailPage() {
             <div className={`card-pad border-2 ${['confirmed','completed'].includes(request.status)?'border-green-200':'border-blue-100'}`}
               style={{background:['confirmed','completed'].includes(request.status)?'#f0fdf4':'#eff6ff'}}>
               <h3 className="font-bold text-sm mb-2" style={{color:['confirmed','completed'].includes(request.status)?'#15803d':'#1e40af'}}>
-                {['confirmed','completed'].includes(request.status)?'✅ Delivery Confirmed':'📧 Awaiting Confirmation'}
+                {['confirmed','completed'].includes(request.status)?'Delivery Confirmed':'Awaiting Confirmation'}
               </h3>
               {['confirmed','completed'].includes(request.status) ? (
                 <div className="text-xs space-y-1">

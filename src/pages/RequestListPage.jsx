@@ -97,7 +97,7 @@ export default function RequestListPage() {
                 <th className="th">Department</th>
                 <th className="th">Requested By</th>
                 <th className="th">Items</th>
-                <th className="th">Priority</th>
+                <th className="th">Level</th>
                 <th className="th">Date</th>
                 <th className="th">Status</th>
                 <th className="th">Action</th>

@@ -55,7 +55,7 @@ export default function CreateRequestPage() {
   const [priority, setPriority]                         = useState('medium')
   const [requestNotes, setRequestNotes]                 = useState('')
 
-  // ── Stock search ─────────────────────────────────────────────────────────────
+  // Stock search 
   useEffect(() => {
     if (stockSearch.length < 1) { setStockResults([]); return }
     const t = setTimeout(async () => {
@@ -98,15 +98,18 @@ export default function CreateRequestPage() {
   })
 
   const validate = () => {
-    if (!toOrganization || !toDepartment) { toast.error('Organization and department required'); return false }
-    if (items.length === 0) { toast.error('Add at least one item'); return false }
-    for (const i of items) {
-      if (i.quantity < 1 || i.quantity > i.available) {
-        toast.error(`Invalid quantity for "${i.name}". Max: ${i.available}`); return false
-      }
-    }
-    return true
+  if (!toOrganization) { toast.error('Organization name is required'); return false }
+  if (!contactPerson || !contactPhone || !contactEmail || !expectedDeliveryDate || !deliveryAddress || !requestNotes || !priority) {
+    toast.error('Please fill in all required fields'); return false
   }
+  if (items.length === 0) { toast.error('Add at least one item'); return false }
+  for (const i of items) {
+    if (i.quantity < 1 || i.quantity > i.available) {
+      toast.error(`Invalid quantity for "${i.name}". Max: ${i.available}`); return false
+    }
+  }
+  return true
+}
 
   const buildPayload = (isDraft) => ({
     ...getFormValues(),
@@ -156,7 +159,7 @@ export default function CreateRequestPage() {
             {[
               ['Organization', toOrganization], ['Department', toDepartment],
               ['Contact', contactPerson || '—'], ['Phone', contactPhone || '—'],
-              ['Email', contactEmail || '—'], ['Priority', priority],
+              ['Email', contactEmail || '—'], ['Level', priority],
               ['Expected Delivery', expectedDeliveryDate || '—'], ['Address', deliveryAddress || '—']
             ].map(([l, v]) => (
               <div key={l}>
@@ -233,42 +236,45 @@ export default function CreateRequestPage() {
           <div className="grid sm:grid-cols-2 gap-4">
 
             <div>
-              <label className="field-label">Organization Name *</label>
+              <label className="field-label">Organization Name <span className='text-red-500'>*</span></label>
               <input className="input input-bordered w-full bg-white text-sm"
                 placeholder="e.g. Great Heights Academy"
-                value={toOrganization} onChange={e => setToOrganization(e.target.value)} required />
+                value={toOrganization} onChange={e => setToOrganization(e.target.value)} />
             </div>
 
             <div>
-              <label className="field-label">Department *</label>
+              <label className="field-label">Department </label>
               <input className="input input-bordered w-full bg-white text-sm"
-                placeholder="e.g. IT, Operations"
-                value={toDepartment} onChange={e => setToDepartment(e.target.value)} required />
+                placeholder="e.g. Sale, Admin"
+                value={toDepartment} onChange={e => setToDepartment(e.target.value)} />
             </div>
 
             <div>
-              <label className="field-label">Contact Person</label>
+              <label className="field-label">Contact Person <span className='text-red-500'>*</span></label>
               <input className="input input-bordered w-full bg-white text-sm"
                 placeholder="Recipient name"
-                value={contactPerson} onChange={e => setContactPerson(e.target.value)} />
+                value={contactPerson} onChange={e => setContactPerson(e.target.value)} 
+                required
+                />
             </div>
 
             <div>
-              <label className="field-label">Contact Phone</label>
+              <label className="field-label">Contact Phone <span className='text-red-500'>*</span></label>
               <input className="input input-bordered w-full bg-white text-sm"
                 placeholder="+234..."
-                value={contactPhone} onChange={e => setContactPhone(e.target.value)} />
+                value={contactPhone} onChange={e => setContactPhone(e.target.value)}
+                required />
             </div>
 
             <div>
-              <label className="field-label">Contact Email (delivery confirmation)</label>
+              <label className="field-label">Contact Email <span className='text-red-500'>*</span>(delivery confirmation)</label>
               <input type="email" className="input input-bordered w-full bg-white text-sm"
                 placeholder="recipient@org.com"
                 value={contactEmail} onChange={e => setContactEmail(e.target.value)} />
             </div>
 
             <div>
-              <label className="field-label">Expected Delivery Date</label>
+              <label className="field-label">Expected Delivery Date <span className='text-red-500'>*</span></label>
               <input type="date" className="input input-bordered w-full bg-white text-sm"
                 value={expectedDeliveryDate} onChange={e => setExpectedDeliveryDate(e.target.value)} />
             </div>
@@ -281,17 +287,17 @@ export default function CreateRequestPage() {
             </div>
 
             <div>
-              <label className="field-label">Priority</label>
+              <label className="field-label">LEVEL <span className='text-red-500'>*</span></label>
               <select className="select select-bordered w-full bg-white text-sm"
                 value={priority} onChange={e => setPriority(e.target.value)}>
-                {['low', 'medium', 'high', 'urgent'].map(p => (
+                {['SSS&JSS Only', 'SSS,JSS&PRY Only', 'NUR&PRY Only', 'UNIVERSITY' , 'COMPANY'].map(p => (
                   <option key={p} value={p} className="capitalize">{p}</option>
                 ))}
               </select>
             </div>
 
             <div className="sm:col-span-2">
-              <label className="field-label">Request Notes</label>
+              <label className="field-label">Request Notes <span className='text-red-500'>*</span></label>
               <textarea className="textarea textarea-bordered w-full bg-white text-sm" rows={2}
                 placeholder="Any special instructions..."
                 value={requestNotes} onChange={e => setRequestNotes(e.target.value)} />
