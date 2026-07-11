@@ -186,7 +186,7 @@ export default function DeliveryListPage() {
                   </p>
                   <div className="overflow-x-auto">
                     <table className="table w-full text-sm">
-                      <thead className="bg-slate-50">
+                      <thead className="bg-slate-100 border-b border-slate-200">
                         <tr>
                           <th className="th">Item</th>
                           <th className="th">Serial</th>
