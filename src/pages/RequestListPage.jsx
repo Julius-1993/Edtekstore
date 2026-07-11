@@ -206,6 +206,8 @@ export default function RequestListPage() {
                     ['Contact', selectedRequest.contactPerson || '—'],
                     ['Phone', selectedRequest.contactPhone || '—'],
                     ['Email', selectedRequest.contactEmail || '—'],
+                    ['Email', selectedRequest.note || '—'],
+                    ['Email', selectedRequest.priority || '—'],
                     ['Expected Delivery', fmtDate(selectedRequest.expectedDeliveryDate) || '—'],
                     ['Shipped At', fmtDateTime(selectedRequest.shippedAt) || '—'],
                     ['Confirmed At', fmtDateTime(selectedRequest.confirmedAt) || '—'],
