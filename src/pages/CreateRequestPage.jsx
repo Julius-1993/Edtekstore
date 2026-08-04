@@ -52,7 +52,7 @@ export default function CreateRequestPage() {
   const [contactEmail, setContactEmail]                 = useState('')
   const [expectedDeliveryDate, setExpectedDeliveryDate] = useState('')
   const [deliveryAddress, setDeliveryAddress]           = useState('')
-  const [priority, setPriority]                         = useState('medium')
+  const [priority, setPriority]                         = useState('SSS & JSS Only')
   const [requestNotes, setRequestNotes]                 = useState('')
 
   // Stock search 
@@ -290,7 +290,7 @@ export default function CreateRequestPage() {
               <label className="field-label">LEVEL <span className='text-red-500'>*</span></label>
               <select className="select select-bordered w-full bg-white text-sm"
                 value={priority} onChange={e => setPriority(e.target.value)}>
-                {['SSS&JSS Only', 'SSS,JSS&PRY Only', 'NUR&PRY Only', 'UNIVERSITY' , 'COMPANY'].map(p => (
+                {['SSS & JSS Only', 'SSS,JSS & PRY Only', 'NUR & PRY Only', 'UNIVERSITY' , 'COMPANY'].map(p => (
                   <option key={p} value={p} className="capitalize">{p}</option>
                 ))}
               </select>

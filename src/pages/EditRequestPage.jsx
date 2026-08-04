@@ -18,7 +18,7 @@ export default function EditRequestPage() {
   const [showPreview, setShowPreview]   = useState(false)
   const [items, setItems]               = useState([])
   const [form, setForm] = useState({
-    toOrganization:'', toDepartment:'', priority:'medium',
+    toOrganization:'', toDepartment:'', priority:'SSS & JSS Only',
     requestNotes:'', contactPerson:'', contactPhone:'',
     contactEmail:'', deliveryAddress:'', expectedDeliveryDate:''
   })
@@ -63,7 +63,7 @@ export default function EditRequestPage() {
   }
 
   const validate = () => {
-    if (!form.toOrganization || !form.toDepartment) { toast.error('Organization and department required'); return false }
+    if (!form.toOrganization ) { toast.error('Organization is required'); return false }
     if (items.length === 0) { toast.error('Add at least one item'); return false }
     for (const i of items) {
       if (i.quantity < 1) { toast.error(`Invalid quantity for "${i.name}"`); return false }
@@ -108,7 +108,7 @@ export default function EditRequestPage() {
       <div className="grid sm:grid-cols-2 gap-4">
         {[
           ['Organization Name *','text','toOrganization','e.g. Acme Corporation Ltd'],
-          ['Department *','text','toDepartment','e.g. IT, Operations'],
+          ['Department','text','toDepartment','e.g. IT, Operations'],
           ['Contact Person','text','contactPerson','Recipient name'],
           ['Contact Phone','text','contactPhone','+234...'],
           ['Contact Email (delivery confirmation)','email','contactEmail','recipient@org.com'],
@@ -127,9 +127,9 @@ export default function EditRequestPage() {
             value={form.deliveryAddress} onChange={e => set('deliveryAddress', e.target.value)} />
         </div>
         <div>
-          <label className="field-label">Priority</label>
+          <label className="field-label">Level</label>
           <select className="select select-bordered w-full bg-white text-sm" value={form.priority} onChange={e => set('priority', e.target.value)}>
-            {['low','medium','high','urgent'].map(p => <option key={p} value={p} className="capitalize">{p}</option>)}
+            {['SSS & JSS Only', 'SSS,JSS & PRY Only', 'NUR & PRY Only', 'UNIVERSITY' , 'COMPANY'].map(p => <option key={p} value={p} className="capitalize">{p}</option>)}
           </select>
         </div>
         <div className="sm:col-span-2">
