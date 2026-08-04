@@ -26,7 +26,7 @@ export const CATEGORIES = [
   { value:'other',       label:'Other',        plain:true      }
 ]
 
-export const SCREEN_SIZES   = ['55','65','75','85','98','110']
+export const SCREEN_SIZES   = ['65','75','85','98','110']
 export const PROCESSORS     = ['Core i3','Core i5','Core i7','Core i9']
 export const RAM_OPTIONS    = ['4GB','8GB','16GB','32GB']
 export const STORAGE_OPTIONS= ['128GB SSD','256GB SSD','512GB SSD','1TB SSD','256GB HDD','1TB HDD']
