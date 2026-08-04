@@ -95,8 +95,8 @@ export default function AddStockPage() {
                   <select className="select select-bordered w-full bg-white text-sm" value={form.deviceSize}
                     onChange={e => set('deviceSize', e.target.value)}>
                     <option value="">Select</option>
-                    <option value="small">Small</option>
-                    <option value="big">Big</option>
+                    <option value="small">Euro</option>
+                    <option value="big">Asian</option>
                   </select>
                 </div>
                 <div>
