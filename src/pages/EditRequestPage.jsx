@@ -109,16 +109,19 @@ export default function EditRequestPage() {
         {[
           ['Organization Name *','text','toOrganization','e.g. Acme Corporation Ltd'],
           ['Department','text','toDepartment','e.g. IT, Operations'],
-          ['Contact Person','text','contactPerson','Recipient name'],
-          ['Contact Phone','text','contactPhone','+234...'],
-          ['Contact Email (delivery confirmation)','email','contactEmail','recipient@org.com'],
+          ['Contact Person *','text','contactPerson','Recipient name'],
+          ['Contact Phone *','text','contactPhone','+234...'],
+          ['Contact Email *','email','contactEmail','recipient@org.com'],
           ['Expected Delivery Date','date','expectedDeliveryDate',''],
         ].map(([label, type, key, ph]) => (
           <div key={key}>
             <label className="field-label">{label}</label>
             <input type={type} className="input input-bordered w-full bg-white text-sm" placeholder={ph}
               value={form[key]} onChange={e => set(key, e.target.value)}
-              required={key === 'toOrganization' || key === 'toDepartment'} />
+              required={key === 'toOrganization' || key === 'contactPerson'} />
+            <input type={type} className="input input-bordered w-full bg-white text-sm" placeholder={ph}
+              value={form[key]} onChange={e => set(key, e.target.value)}
+              required={key === 'contactPhone' || key === 'contactEmail'} />
           </div>
         ))}
         <div className="sm:col-span-2">
@@ -129,7 +132,7 @@ export default function EditRequestPage() {
         <div>
           <label className="field-label">Level</label>
           <select className="select select-bordered w-full bg-white text-sm" value={form.priority} onChange={e => set('priority', e.target.value)}>
-            {['SSS & JSS Only', 'SSS,JSS & PRY Only', 'NUR & PRY Only', 'UNIVERSITY' , 'COMPANY'].map(p => <option key={p} value={p} className="capitalize">{p}</option>)}
+            {['SSS & JSS Only', 'SSS, JSS & PRY Only', 'JSS & PRY Only', 'NUR & PRY Only', 'UNIVERSITY' , 'COMPANY'].map(p => <option key={p} value={p} className="capitalize">{p}</option>)}
           </select>
         </div>
         <div className="sm:col-span-2">

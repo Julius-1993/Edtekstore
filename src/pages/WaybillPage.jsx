@@ -103,8 +103,7 @@ export default function WaybillPage() {
                 </span>
               <span style={{ fontSize:7, fontWeight:700, color:'#555', letterSpacing:0.5, textTransform:'uppercase' }}>INTERACTIVE BOARD</span>
             </div>
-            {/* <div style={{ width:3, height:50, background:'#2d7a2d' }} />
-            <div style={{ width:60, height:12, background:'#2d7a2d', borderRadius:2 }} /> */}
+           
           </div>
           {/* Waybill title */}
           <div style={{ textAlign:'right' }}>
@@ -234,7 +233,7 @@ export default function WaybillPage() {
         {/* ── METADATA (shown on screen, hidden on print) ── */}
         <div className="no-print" style={{ background:'#eff6ff', borderTop:'1px solid #bfdbfe', padding:'12px 28px', display:'flex', gap:24, flexWrap:'wrap' }}>
           <div style={{ fontSize:12, color:'#1e40af' }}>
-            <strong>Request No:</strong> {r.requestNumber}
+            <strong>Request Number:</strong> {r.requestNumber}
           </div>
           <div style={{ fontSize:12, color:'#1e40af' }}>
             <strong>Requested by:</strong> {r.requestedBy?.name}

@@ -290,7 +290,7 @@ export default function CreateRequestPage() {
               <label className="field-label">LEVEL <span className='text-red-500'>*</span></label>
               <select className="select select-bordered w-full bg-white text-sm"
                 value={priority} onChange={e => setPriority(e.target.value)}>
-                {['SSS & JSS Only', 'SSS,JSS & PRY Only', 'NUR & PRY Only', 'UNIVERSITY' , 'COMPANY'].map(p => (
+                {['SSS & JSS Only', 'SSS, JSS & PRY Only', 'JSS & PRY Only', 'NUR & PRY Only', 'UNIVERSITY' , 'COMPANY'].map(p => (
                   <option key={p} value={p} className="capitalize">{p}</option>
                 ))}
               </select>
