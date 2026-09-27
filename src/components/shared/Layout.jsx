@@ -22,47 +22,132 @@ export default function Layout() {
   const filteredNav = NAV.filter(n => n.roles.includes(user?.role))
 
   const sidebarContent = (
-    <div className="flex flex-col h-full">
-      <div className="px-5 py-5 border-b" style={{ borderColor:'rgba(255,255,255,0.07)' }}>
-        <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="EDTEK" style={{ width:48, height:48, objectFit:'contain', flexShrink:0 }} />
-          <div>
-            <h1 className="text-white font-bold text-base leading-none">EDTEK StoreTrack</h1>
-            <p className="text-xs mt-0.5 font-medium" style={{ color:'#4a9eff' }}>Inventory System</p>
-          </div>
-        </div>
-      </div>
-      <nav className="flex-1 py-4 space-y-0.5 overflow-y-auto">
-        <p className="px-6 text-xs font-bold uppercase tracking-widest mb-3 mt-2" style={{ color:'#2d5080' }}>Menu</p>
-        {filteredNav.map(({ to, label, icon:Icon, exact }) => (
-          <NavLink key={to} to={to} end={exact} onClick={() => setOpen(false)}
-            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-            <Icon className="w-4 h-4 flex-shrink-0" /><span className="text-sm">{label}</span>
-          </NavLink>
-        ))}
-      </nav>
-      <div className="p-3 border-t" style={{ borderColor:'rgba(255,255,255,0.06)' }}>
-        <div className="rounded-xl p-3" style={{ background:'rgba(255,255,255,0.04)' }}>
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background:ROLE_BG[user?.role] }}>
-              <User className="w-4 h-4" style={{ color:ROLE_COLOR[user?.role] }} />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-white text-xs font-semibold truncate">{user?.name}</p>
-              <p className="text-xs truncate" style={{ color:'#4a7aaa' }}>{user?.email}</p>
-            </div>
-          </div>
-          <div className="flex items-center justify-between mt-2.5 pt-2.5" style={{ borderTop:'1px solid rgba(255,255,255,0.06)' }}>
-            <span className="text-xs font-bold capitalize px-2 py-0.5 rounded-full" style={{ color:ROLE_COLOR[user?.role], background:ROLE_BG[user?.role] }}>{user?.role}</span>
-            <button onClick={() => { logout(); navigate('/login') }} className="flex items-center gap-1 text-xs font-medium" style={{ color:'#4a7aaa' }}
-              onMouseEnter={e => e.currentTarget.style.color='#f87171'} onMouseLeave={e => e.currentTarget.style.color='#4a7aaa'}>
-              <LogOut className="w-3.5 h-3.5" /> Sign out
-            </button>
-          </div>
+  <div className="flex flex-col h-full min-h-0">
+    {/* Logo */}
+    <div
+      className="px-5 py-5 border-b flex-shrink-0"
+      style={{ borderColor: 'rgba(255,255,255,0.07)' }}
+    >
+      <div className="flex items-center gap-3">
+        <img
+          src="/logo.png"
+          alt="EDTEK"
+          style={{
+            width: 48,
+            height: 48,
+            objectFit: 'contain',
+            flexShrink: 0
+          }}
+        />
+
+        <div>
+          <h1 className="text-white font-bold text-base leading-none">
+            EDTEK StoreTrack
+          </h1>
+
+          <p
+            className="text-xs mt-0.5 font-medium"
+            style={{ color: '#4a9eff' }}
+          >
+            Inventory System
+          </p>
         </div>
       </div>
     </div>
-  )
+
+    {/* Navigation */}
+    <nav className="flex-1 min-h-0 py-4 space-y-0.5 overflow-y-auto">
+      <p
+        className="px-6 text-xs font-bold uppercase tracking-widest mb-3 mt-2"
+        style={{ color: '#2d5080' }}
+      >
+        Menu
+      </p>
+
+      {filteredNav.map(({ to, label, icon: Icon, exact }) => (
+        <NavLink
+          key={to}
+          to={to}
+          end={exact}
+          onClick={() => setOpen(false)}
+          className={({ isActive }) =>
+            `nav-link ${isActive ? 'active' : ''}`
+          }
+        >
+          <Icon className="w-4 h-4 flex-shrink-0" />
+          <span className="text-sm">{label}</span>
+        </NavLink>
+      ))}
+    </nav>
+
+    {/* User / Logout */}
+    <div
+      className="p-3 border-t flex-shrink-0"
+      style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+    >
+      <div
+        className="rounded-xl p-3"
+        style={{ background: 'rgba(255,255,255,0.04)' }}
+      >
+        <div className="flex items-center gap-2.5">
+          <div
+            className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ background: ROLE_BG[user?.role] }}
+          >
+            <User
+              className="w-4 h-4"
+              style={{ color: ROLE_COLOR[user?.role] }}
+            />
+          </div>
+
+          <div className="flex-1 min-w-0">
+            <p className="text-white text-xs font-semibold truncate">
+              {user?.name}
+            </p>
+
+            <p
+              className="text-xs truncate"
+              style={{ color: '#4a7aaa' }}
+            >
+              {user?.email}
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="flex items-center justify-between mt-2.5 pt-2.5"
+          style={{
+            borderTop: '1px solid rgba(255,255,255,0.06)'
+          }}
+        >
+          <span
+            className="text-xs font-bold capitalize px-2 py-0.5 rounded-full"
+            style={{
+              color: ROLE_COLOR[user?.role],
+              background: ROLE_BG[user?.role]
+            }}
+          >
+            {user?.role}
+          </span>
+
+          <button
+            type="button"
+            onClick={() => {
+              logout()
+              navigate('/login')
+              setOpen(false)
+            }}
+            className="flex items-center gap-1.5 text-xs font-medium px-2 py-1 rounded-md hover:bg-red-500/10 transition-colors"
+            style={{ color: '#4a7aaa' }}
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            <span>Sign out</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)
 
   return (
     <div className="flex h-screen overflow-hidden bg-slate-50">
